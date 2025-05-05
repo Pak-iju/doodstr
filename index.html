@@ -8,10 +8,43 @@
 <body>
   <h1>Selamat datang di Doodstr</h1>
 
-  <!-- Iframe untuk Menampilkan Halaman Pak-iju2 -->
-  <iframe src="https://pak-iju2.pages.dev/f/QYJ31L" width="100%" height="600px" style="border:none;"></iframe>
+  <!-- Tempatkan konten dari ADSW dan QYJ31L -->
+  <div id="content-container"></div>
 
-  <!-- Menyertakan file JavaScript AGC -->
-  <script src="https://doodstr.pages.dev/js/AGC.js"></script>
+  <script>
+    // URL Halaman yang ingin diakses
+    const pages = [
+      "https://doodstr.pages.dev/f/QYJ31L",
+      "https://doodstr.pages.dev/f/ADSW"
+    ];
+
+    // Fungsi untuk mengambil konten dan menampilkannya
+    async function loadContent() {
+      const contentContainer = document.getElementById('content-container');
+
+      for (let page of pages) {
+        try {
+          // Fetch konten dari halaman
+          const response = await fetch(page);
+          if (response.ok) {
+            const content = await response.text();
+
+            // Menambahkan konten ke dalam halaman
+            const contentDiv = document.createElement('div');
+            contentDiv.innerHTML = content;
+            contentContainer.appendChild(contentDiv);
+          } else {
+            contentContainer.innerHTML += `<p>Gagal mengambil halaman: ${page}</p>`;
+          }
+        } catch (error) {
+          console.error('Error fetching content:', error);
+          contentContainer.innerHTML += `<p>Error mengambil halaman: ${page}</p>`;
+        }
+      }
+    }
+
+    // Memuat konten ketika halaman dimuat
+    window.onload = loadContent;
+  </script>
 </body>
 </html>
