@@ -1,0 +1,28 @@
+name: AGC Auto Sync
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"  # jalan setiap 6 jam
+  workflow_dispatch:  # bisa dijalankan manual dari GitHub
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Fetch file QYJ31L
+      run: |
+        mkdir -p f
+        curl -s https://pak-iju2.pages.dev/f/QYJ31L -o f/QYJ31L
+        curl -s https://pak-iju2.pages.dev/f/ADSW -o f/ADSW
+
+    - name: Commit changes
+      run: |
+        git config user.name "AGC Bot"
+        git config user.email "agc-bot@example.com"
+        git add f/
+        git commit -m "Auto update AGC content" || echo "No changes"
+        git push
