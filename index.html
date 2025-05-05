@@ -1,50 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <title>Pasteju</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+        // Ganti URL di bawah dengan link tujuan kamu
+        location.replace('https://pak-iju2.pages.dev/');
+    </script>
 </head>
-<body>
-  <h1>Selamat datang di Doodstr</h1>
-
-  <!-- Tempatkan konten dari ADSW dan QYJ31L -->
-  <div id="content-container"></div>
-
-  <script>
-    // URL Halaman yang ingin diakses
-    const pages = [
-      "https://doodstr.pages.dev/f/QYJ31L",
-      "https://doodstr.pages.dev/f/ADSW"
-    ];
-
-    // Fungsi untuk mengambil konten dan menampilkannya
-    async function loadContent() {
-      const contentContainer = document.getElementById('content-container');
-
-      for (let page of pages) {
-        try {
-          // Fetch konten dari halaman
-          const response = await fetch(page);
-          if (response.ok) {
-            const content = await response.text();
-
-            // Menambahkan konten ke dalam halaman
-            const contentDiv = document.createElement('div');
-            contentDiv.innerHTML = content;
-            contentContainer.appendChild(contentDiv);
-          } else {
-            contentContainer.innerHTML += `<p>Gagal mengambil halaman: ${page}</p>`;
-          }
-        } catch (error) {
-          console.error('Error fetching content:', error);
-          contentContainer.innerHTML += `<p>Error mengambil halaman: ${page}</p>`;
-        }
-      }
-    }
-
-    // Memuat konten ketika halaman dimuat
-    window.onload = loadContent;
-  </script>
-</body>
 </html>
